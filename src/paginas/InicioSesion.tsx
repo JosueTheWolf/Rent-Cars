@@ -1,7 +1,7 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState, } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Mail, User, Lock, Eye, EyeOff } from "lucide-react";
-import { z } from "zod"; // Librería para validar datos con esquemas tipados
+import { z } from "zod"; 
 import { useUsuario } from "@/contexto/UsuarioContext";
 const fondoAuto = "/60fec9b2808152a899e107c20953f2c76dc8d726.jpg";
 const esquemaCorreo = z
