@@ -99,7 +99,7 @@ const InicioSesion = () => {
                 if (errores.identidad) setErrores((er) => ({ ...er, identidad: undefined }));
               }}
               maxLength={255}
-              className="flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
+              className="min-w-0 flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
           </div>
           {errores.identidad && (
