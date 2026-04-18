@@ -1,13 +1,3 @@
-/**
- * Registro.tsx — PANTALLA DE REGISTRO en 2 pasos (wizard).
- *
- * Conceptos demostrados:
- *  - useState para controlar el paso actual (1 o 2) y el objeto `formulario`.
- *  - Patrón "objeto único de estado": un solo setFormulario actualiza cualquier campo.
- *  - Componente reutilizable `CampoEntrada` → DRY (no repetir el mismo input 8 veces).
- *  - useContext (useUsuario) para guardar el usuario recién registrado.
- *  - useNavigate para mover al usuario a /inicio al terminar.
- */
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Mail, Lock, User, Phone, Calendar, CreditCard } from "lucide-react";
@@ -22,8 +12,6 @@ const Registro = () => {
     correo: "", contrasenia: "", nombre: "", apellidoPaterno: "",
     apellidoMaterno: "", licencia: "", fechaNacimiento: "", telefono: "", sexo: "",
   });
-
-  // Updater genérico: una sola función actualiza cualquier campo del formulario
   const actualizar = (clave: string, valor: string) => setFormulario((anterior) => ({ ...anterior, [clave]: valor }));
 
   const manejarEnvio = (e: React.FormEvent) => {
@@ -31,7 +19,6 @@ const Registro = () => {
     if (paso === 1) {
       setPaso(2);
     } else {
-      // Guardamos el usuario registrado en el Context global
       const nombreCompleto = [formulario.nombre, formulario.apellidoPaterno]
         .filter(Boolean)
         .join(" ")
@@ -56,8 +43,6 @@ const Registro = () => {
       />
       <h1 className="mb-2 text-3xl font-bold tracking-wide text-foreground">Registro</h1>
       <p className="mb-8 text-base text-muted-foreground">Completa los campos</p>
-
-      {/* Indicador de pasos */}
       <div className="mb-8 flex items-center">
         <button type="button" onClick={() => setPaso(1)} className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-base font-bold transition-colors ${paso >= 1 ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground"}`}>1</button>
         <div className={`h-0.5 w-14 transition-colors -mx-[2px] ${paso >= 2 ? "bg-accent" : "bg-muted"}`} />
@@ -113,8 +98,6 @@ const Registro = () => {
     </div>
   );
 };
-
-// Componente reutilizable para campos de entrada
 const CampoEntrada = ({ icono, placeholder, valor, alCambiar, tipo = "text" }: {
   icono: React.ReactNode; placeholder: string; valor: string; alCambiar: (v: string) => void; tipo?: string;
 }) => (

@@ -8,18 +8,6 @@ interface PropsTarjeta {
   vehiculo: Vehiculo;
 }
 
-/**
- * Tarjeta individual de un vehículo en la grilla.
- *
- * Optimización: React.memo evita re-renderizar cada tarjeta cuando el padre
- * (ListaVehiculos) se re-renderiza por cambios ajenos a esta tarjeta — por
- * ejemplo, cuando el usuario tipea en el buscador y la lista filtrada NO
- * cambia para esta tarjeta, igual no se vuelve a pintar.
- *
- * Como `vehiculo` es un objeto estable (viene del array original), la
- * comparación shallow de memo funciona perfecto sin necesidad de un
- * comparador custom.
- */
 const variantes = {
   oculto: { opacity: 0, y: 20, scale: 0.95 },
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3 } },

@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
-/**
- * Envoltorio que aplica una transición suave (fade + slide) a cualquier página.
- * Se usa como wrapper en cada página para que la entrada sea consistente.
- */
 const TransicionPagina = ({ children }: { children: ReactNode }) => (
   <motion.div
     initial={{ opacity: 0, y: 12 }}

@@ -1,21 +1,12 @@
 import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from "react";
 import type { Vehiculo } from "@/datos/vehiculos";
-
-/**
- * ReservasContext — gestión GLOBAL de las reservas hechas por el usuario.
- *
- * Antes: Historial mostraba reservas falsas hardcodeadas.
- * Después: cuando el usuario completa una reserva en /reservar, la guardamos
- * en este context y aparece automáticamente en /historial.
- */
-
 export interface Reserva {
   id: string;
   vehiculo: Vehiculo;
   fechaRetiro: string;
   fechaDevolucion: string;
   total: number;
-  fechaCreacion: string; // dd/mm/yyyy
+  fechaCreacion: string; 
 }
 
 interface ContextoReservas {

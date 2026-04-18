@@ -7,7 +7,6 @@ import TransicionPagina from "@/componentes/TransicionPagina";
 import AvatarUsuario from "@/componentes/AvatarUsuario";
 import { vehiculos } from "@/datos/vehiculos";
 import { useUsuario } from "@/contexto/UsuarioContext";
-// Imágenes servidas desde la carpeta public/
 const videosCarrusel = [
   "/medios/4runner.mp4",
   "/medios/sentra.mp4",
@@ -22,7 +21,6 @@ const Bienvenida = () => {
   return (
     <TransicionPagina>
       <div className="flex min-h-screen flex-col bg-background pb-20">
-        {/* Encabezado */}
         <motion.div
           className="px-6 pt-6 pb-4"
           initial={{ opacity: 0, y: -10 }}
@@ -40,8 +38,6 @@ const Bienvenida = () => {
             <Bell size={22} className="text-muted-foreground" />
           </div>
         </motion.div>
-
-        {/* Banner principal - Carrusel de videos */}
         <motion.div
           className="mx-6 mb-6"
           initial={{ opacity: 0, scale: 0.96 }}
@@ -50,8 +46,6 @@ const Bienvenida = () => {
         >
           <CarruselVideos videos={videosCarrusel} />
         </motion.div>
-
-        {/* Banner promocional */}
         <motion.div
           className="mx-6 mb-6 overflow-hidden rounded-2xl border border-cyan bg-card p-5"
           initial={{ opacity: 0, x: -20 }}
@@ -75,8 +69,6 @@ const Bienvenida = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* Vehículos populares con stagger */}
         <div className="px-6 pb-4">
           <h2 className="mb-3 text-lg font-bold text-foreground">Vehiculos Populares</h2>
           <motion.div

@@ -20,12 +20,6 @@ const tarjetaVariantes = {
 const Historial = () => {
   const { reservas } = useReservas();
   const { usuario } = useUsuario();
-
-  /**
-   * useMemo: combinamos las reservas REALES del usuario (del Context) con
-   * el historial demo. Las reales aparecen primero. Solo recalcula cuando
-   * cambia el array de reservas.
-   */
   const elementos = useMemo(() => {
     const reales = reservas.map((reserva) => ({
       id: reserva.id,

@@ -5,10 +5,6 @@ interface Props {
   titulo: string;
 }
 
-/**
- * Cabecera reutilizable para las subpáginas del Perfil.
- * Muestra un botón "volver" alineado a la izquierda y el título centrado.
- */
 const CabeceraSecundaria = ({ titulo }: Props) => {
   const navegar = useNavigate();
   return (

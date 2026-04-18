@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import NavInferior from "@/componentes/NavInferior";
 import TransicionPagina from "@/componentes/TransicionPagina";
 import { vehiculos } from "@/datos/vehiculos";
-
-// Variantes para el stagger de las especificaciones
 const grillaVariantes = {
   oculto: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.07, delayChildren: 0.2 } },
@@ -25,7 +23,6 @@ const DetalleVehiculo = () => {
   return (
     <TransicionPagina>
       <div className="flex min-h-screen flex-col bg-background pb-20">
-        {/* Imagen de encabezado */}
         <div className="relative h-72 bg-black overflow-hidden">
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -46,8 +43,6 @@ const DetalleVehiculo = () => {
             />
           </div>
         </div>
-
-        {/* Contenido */}
         <div className="flex-1 px-6 pt-4">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -59,8 +54,6 @@ const DetalleVehiculo = () => {
               {vehiculo.marca} {vehiculo.modelo}
             </h1>
           </motion.div>
-
-          {/* Grilla de especificaciones con stagger */}
           <motion.div
             className="mt-5 grid grid-cols-2 gap-3"
             variants={grillaVariantes}
@@ -80,8 +73,6 @@ const DetalleVehiculo = () => {
               <ItemEspecificacion icono={<Car size={18} />} etiqueta="Tipo" valor={vehiculo.tipo} />
             </motion.div>
           </motion.div>
-
-          {/* Campos de ubicación */}
           <motion.div
             className="mt-6 space-y-3"
             initial={{ opacity: 0, y: 15 }}
@@ -125,8 +116,6 @@ const DetalleVehiculo = () => {
     </TransicionPagina>
   );
 };
-
-// Componente para mostrar cada especificación
 const ItemEspecificacion = ({ icono, etiqueta, valor }: { icono: React.ReactNode; etiqueta: string; valor: string }) => (
   <div className="flex items-center gap-2 rounded-lg border border-cyan/40 bg-card px-3 py-3">
     <span className="text-cyan">{icono}</span>

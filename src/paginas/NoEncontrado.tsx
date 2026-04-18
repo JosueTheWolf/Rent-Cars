@@ -1,12 +1,3 @@
-/**
- * NoEncontrado.tsx — pantalla 404.
- *
- * Se muestra cuando el usuario navega a una URL que no existe (ruta "*"
- * en App.tsx). Demuestra el uso de:
- *  - useLocation() → obtener la ruta actual desde el router.
- *  - useEffect()   → ejecutar un efecto secundario (loggear el 404 en
- *                    consola para debug) cuando cambia la ruta.
- */
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 

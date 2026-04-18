@@ -1,26 +1,3 @@
-/**
- * usar-notificacion.ts — HOOK PERSONALIZADO + REDUCER para los toasts.
- *
- * Sirve para mostrar notificaciones tipo "Perfil actualizado" desde
- * cualquier parte de la app: se llama `toast({ title, description })`.
- *
- * Conceptos clave de la rúbrica que se demuestran aquí:
- *
- *  - useReducer (patrón reducer):
- *      La función `reducer(state, action)` maneja TODOS los cambios de
- *      estado (ADD_TOAST, UPDATE_TOAST, DISMISS_TOAST, REMOVE_TOAST).
- *      Es el mismo patrón que Redux pero nativo de React. Se usa en
- *      lugar de useState porque las acciones son varias y complejas.
- *
- *  - PUB/SUB (publicador-suscriptor):
- *      El array `listeners` y la función `dispatch` permiten que muchos
- *      componentes se enteren del mismo cambio de estado, incluso si
- *      no comparten Provider. Es un mini "store" global hecho a mano.
- *
- *  - Hook `useToast()`:
- *      Cada componente que quiera ver los toasts se suscribe en useEffect
- *      y se desuscribe al desmontar (cleanup) → sin memory leaks.
- */
 import * as React from "react";
 
 import type { ToastActionElement, ToastProps } from "@/componentes/ui/notificacion";
@@ -107,9 +84,6 @@ export const reducer = (state: State, action: Action): State => {
 
     case "DISMISS_TOAST": {
       const { toastId } = action;
-
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
       if (toastId) {
         addToRemoveQueue(toastId);
       } else {

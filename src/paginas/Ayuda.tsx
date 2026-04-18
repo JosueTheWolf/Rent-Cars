@@ -1,12 +1,3 @@
-/**
- * Ayuda.tsx — sección de FAQ + canales de contacto.
- *
- * Demuestra:
- *  - Uso de un componente de la librería shadcn/ui: <Accordion> (basado en Radix UI).
- *    Radix garantiza accesibilidad: navegación por teclado, ARIA, focus management.
- *  - `type="single" collapsible` → solo se abre una pregunta a la vez.
- *  - Render dinámico de listas (faqs y contactos) con .map().
- */
 import { Mail, Phone, MessageCircle, HelpCircle } from "lucide-react";
 import TransicionPagina from "@/componentes/TransicionPagina";
 import NavInferior from "@/componentes/NavInferior";

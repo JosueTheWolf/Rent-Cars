@@ -1,15 +1,3 @@
-/**
- * Perfil.tsx — PANTALLA DE PERFIL DEL USUARIO.
- *
- * Demuestra:
- *  - useContext (useUsuario): lee y modifica el usuario global (nombre, email, país)
- *    + función `cerrarSesion` que limpia localStorage.
- *  - useState local para el modo "edición" del nombre (borrador antes de confirmar).
- *  - Renderizado condicional: muestra input editable o texto plano según `editando`.
- *  - useNavigate para entrar a las subpantallas (/perfil/editar, /perfil/pago, etc.).
- *  - framer-motion: stagger en el menú + animaciones whileHover/whileTap.
- *  - Accesibilidad: aria-label, soporte de teclas Enter/Escape al editar el nombre.
- */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -65,14 +53,11 @@ const Perfil = () => {
   return (
     <TransicionPagina>
       <div className="flex min-h-screen flex-col bg-background pb-20">
-        {/* Encabezado */}
         <div className="flex items-center justify-between px-6 pt-6">
           <span />
           <h2 className="text-lg font-bold text-foreground">Mi Perfil</h2>
           <span />
         </div>
-
-        {/* Información del perfil */}
         <motion.div
           className="flex flex-col items-center px-6 pt-4 pb-6"
           initial={{ opacity: 0, scale: 0.85 }}
@@ -140,8 +125,6 @@ const Perfil = () => {
             {usuario.pais}
           </motion.p>
         </motion.div>
-
-        {/* Elementos del menú */}
         <div className="flex-1 px-6 pb-4">
           <motion.div
             className="space-y-2"

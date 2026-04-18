@@ -1,24 +1,3 @@
-/**
- * datos/vehiculos.ts — "BASE DE DATOS LOCAL" de la aplicación.
- *
- * Como esta app aún no usa un backend real, simulamos los datos con un
- * array TypeScript. Esto cumple dos funciones importantes para la rúbrica:
- *
- *  1) TIPADO FUERTE con `interface Vehiculo`: TypeScript valida en
- *     tiempo de compilación que cada vehículo tenga TODOS los campos
- *     requeridos. Si en otro archivo escribimos `vehiculo.precio` (mal),
- *     el editor marca error → menos bugs en producción.
- *
- *  2) FUENTE ÚNICA DE VERDAD: todas las páginas (Lista, Detalle, Reserva,
- *     Bienvenida, Historial) importan desde aquí. Si mañana cambia el
- *     precio del Toyota Hilux, solo se edita en un lugar.
- *
- * En el futuro este archivo se reemplazaría por llamadas a una API
- * (fetch / React Query) sin tocar el resto de la app, porque las páginas
- * dependen de la INTERFAZ, no del array.
- */
-
-// Forma (contrato) que debe tener cada vehículo en la app.
 export interface Vehiculo {
   id: string;
   marca: string;
@@ -31,7 +10,7 @@ export interface Vehiculo {
   precioPorDia: number;
   calificacion: number;
   imagen: string;
-  viajes?: number; // El "?" indica que es opcional
+  viajes?: number;
 }
 
 export const vehiculos: Vehiculo[] = [
@@ -92,13 +71,6 @@ export const vehiculos: Vehiculo[] = [
     viajes: 20,
   },
 ];
-
-/**
- * Historial demo: lo mostramos en /historial como ejemplo cuando el
- * usuario aún no ha hecho reservas reales. Las reservas reales (creadas
- * desde la pantalla de Reserva) viven en ReservasContext y aparecen
- * ANTES que estas en la lista.
- */
 export interface HistorialAlquiler {
   id: string;
   vehiculo: Vehiculo;

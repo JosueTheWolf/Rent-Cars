@@ -1,18 +1,7 @@
-/**
- * MetodoPago.tsx — pantalla de tarjetas guardadas (DEMO, sin backend).
- *
- * Demuestra:
- *  - Renderizado de listas con .map() y `key` única.
- *  - Componente puro / sin estado → más simple y predecible.
- *  - Reutilización de CabeceraSecundaria y NavInferior (composición).
- *  - Diseño con tokens del design system (border-cyan, bg-card, foreground).
- */
 import { CreditCard, Plus } from "lucide-react";
 import TransicionPagina from "@/componentes/TransicionPagina";
 import NavInferior from "@/componentes/NavInferior";
 import CabeceraSecundaria from "@/componentes/CabeceraSecundaria";
-
-// Datos demo: en una app real vendrían de la API del backend
 const tarjetas = [
   { tipo: "Visa", numero: "**** **** **** 4521", titular: "Valeria Gusman", vence: "08/27" },
   { tipo: "Mastercard", numero: "**** **** **** 8890", titular: "Valeria Gusman", vence: "11/26" },

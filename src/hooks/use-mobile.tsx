@@ -1,18 +1,3 @@
-/**
- * use-mobile.tsx — HOOK PERSONALIZADO `useIsMobile()`.
- *
- * Demuestra el criterio del profe: "creación de hooks personalizados".
- * Encapsula la lógica de "¿estoy en pantalla móvil?" para que cualquier
- * componente la consuma con una sola línea: `const esMovil = useIsMobile();`
- *
- * Internamente usa:
- *  - useState   → guarda el booleano (true/false).
- *  - useEffect  → se suscribe a `matchMedia` (API del navegador) y
- *                 actualiza el estado cuando el ancho cambia.
- *  - cleanup    → al desmontar, quita el listener para evitar memory leaks.
- *
- * Breakpoint = 768px (mismo que Tailwind usa para "md").
- */
 import * as React from "react";
 
 const MOBILE_BREAKPOINT = 768;

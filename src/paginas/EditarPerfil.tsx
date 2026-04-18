@@ -1,15 +1,3 @@
-/**
- * EditarPerfil.tsx — FORMULARIO de edición de los datos del usuario.
- *
- * Conceptos clave:
- *  - useState con un OBJETO completo (`form`) inicializado a partir del contexto.
- *    El form local es un "borrador" → no toca el contexto global hasta hacer click
- *    en Guardar. Esto permite cancelar sin perder los datos originales.
- *  - Componente reutilizable `CampoEditable` con render-prop de ícono → DRY.
- *  - Validación simple antes de guardar (nombre y email obligatorios).
- *  - `toast()` (sistema de notificaciones con useReducer) para feedback al usuario.
- *  - useContext (useUsuario.actualizarUsuario) → propaga el cambio a TODA la app.
- */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Mail, Phone, Calendar, Save, MapPin } from "lucide-react";
@@ -50,8 +38,6 @@ const CampoEditable = ({ icono: Icono, etiqueta, valor, tipo = "text", onChange 
 const EditarPerfil = () => {
   const { usuario, actualizarUsuario } = useUsuario();
   const navegar = useNavigate();
-
-  // Estado local del formulario (no toca el contexto hasta guardar)
   const [form, setForm] = useState(usuario);
 
   const cambio = (campo: keyof typeof form) => (valor: string) =>

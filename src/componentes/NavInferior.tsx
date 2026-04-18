@@ -2,14 +2,6 @@ import { memo } from "react";
 import { Home, Clock, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
-/**
- * Barra de navegación inferior.
- *
- * Optimización: envuelta con React.memo. Aunque está en 5 páginas distintas,
- * solo se re-renderiza cuando cambia su propio estado interno (la ruta).
- * Como no recibe props, memo evita renders innecesarios provocados por padres
- * que se re-renderizan por estados ajenos a la navegación.
- */
 const NavInferior = () => {
   const ubicacion = useLocation();
 

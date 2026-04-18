@@ -1,12 +1,5 @@
 import { memo } from "react";
 
-/**
- * AvatarUsuario — círculo con la inicial del nombre del usuario.
- * Estilo cyan con borde brillante (glow), consistente con el resto del diseño.
- *
- * Optimizado con React.memo: solo se re-renderiza si cambian nombre o tamaño.
- */
-
 interface PropsAvatar {
   nombre: string;
   tamanio?: "sm" | "md" | "lg" | "xl";
@@ -28,7 +21,7 @@ const AvatarUsuario = ({ nombre, tamanio = "md", className = "" }: PropsAvatar) 
       className={`relative inline-flex items-center justify-center rounded-full bg-cyan/20 border-2 border-cyan font-bold text-cyan shadow-[0_0_15px_hsl(var(--cyan)/0.6)] ${TAMANIOS[tamanio]} ${className}`}
       aria-label={`Avatar de ${nombre}`}
     >
-      {/* Halo de brillo sutil */}
+      
       <span className="absolute inset-0 rounded-full bg-cyan/10 blur-md -z-10" />
       <span>{inicial}</span>
     </div>

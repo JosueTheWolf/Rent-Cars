@@ -1,9 +1,3 @@
-/**
- * Terminos.tsx — pantalla estática de Términos y Condiciones legales.
- *
- * Es un componente PURO sin estado: solo renderiza JSX. No usa hooks porque
- * no hay nada que cambie en el tiempo. Es el componente más simple de la app.
- */
 import TransicionPagina from "@/componentes/TransicionPagina";
 import NavInferior from "@/componentes/NavInferior";
 import CabeceraSecundaria from "@/componentes/CabeceraSecundaria";

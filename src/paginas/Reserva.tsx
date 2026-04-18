@@ -6,8 +6,6 @@ import TransicionPagina from "@/componentes/TransicionPagina";
 import { vehiculos } from "@/datos/vehiculos";
 import { useReservas } from "@/contexto/ReservasContext";
 import { useUsuario } from "@/contexto/UsuarioContext";
-
-// Stagger para los campos del formulario
 const contenedorVariantes = {
   oculto: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
@@ -24,11 +22,6 @@ const Reserva = () => {
   const navegar = useNavigate();
   const { agregarReserva } = useReservas();
   const { usuario } = useUsuario();
-
-  /**
-   * useMemo: el find() solo se ejecuta cuando cambia el id de la URL.
-   * Sin esto, recorreríamos el array en cada tipeo del usuario.
-   */
   const vehiculo = useMemo(
     () => vehiculos.find((v) => v.id === id),
     [id]
@@ -41,18 +34,11 @@ const Reserva = () => {
   const [telefono, setTelefono] = useState("");
   const [correo, setCorreo] = useState(usuario.email);
   const [sillasNinio, setSillasNinio] = useState(0);
-
-  // useMemo para los cálculos de precio: solo recalcula cuando cambian sus deps
   const precioSillas = useMemo(() => sillasNinio * PRECIO_SILLA, [sillasNinio]);
   const total = useMemo(
     () => (vehiculo?.precioPorDia ?? 0) + precioSillas,
     [vehiculo, precioSillas]
   );
-
-  /**
-   * useCallback: estos handlers mantienen la misma referencia entre renders,
-   * lo que permite pasarlos a botones memoizados sin romper el memo.
-   */
   const incrementarSillas = useCallback(() => setSillasNinio((s) => s + 1), []);
   const decrementarSillas = useCallback(
     () => setSillasNinio((s) => Math.max(0, s - 1)),
@@ -61,7 +47,6 @@ const Reserva = () => {
 
   const manejarReserva = useCallback(() => {
     if (vehiculo) {
-      // Guardamos la reserva en el Context global → aparece en Historial
       agregarReserva({
         vehiculo,
         fechaRetiro: fechaRetiro || new Date().toLocaleDateString("es-PE"),
@@ -81,7 +66,6 @@ const Reserva = () => {
     <TransicionPagina>
       <div className="flex min-h-screen flex-col bg-background">
         <div className="mx-auto w-full max-w-md">
-          {/* Encabezado */}
           <div className="flex items-center gap-3 px-4 py-4">
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -100,7 +84,6 @@ const Reserva = () => {
             initial="oculto"
             animate="visible"
           >
-            {/* Tarjeta: Fecha de Retiro + Hora */}
             <motion.div variants={campoVariantes} className="space-y-2 rounded-xl border border-cyan/40 bg-card p-4">
               <label className="text-sm font-bold text-foreground">Fecha de Retiro</label>
               <input type="date" value={fechaRetiro} onChange={(e) => setFechaRetiro(e.target.value)}
@@ -111,8 +94,6 @@ const Reserva = () => {
                   className="rounded-md border border-cyan/60 bg-background/40 px-2 py-1 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-cyan" />
               </div>
             </motion.div>
-
-            {/* Tarjeta: Fecha de Devolución + Hora */}
             <motion.div variants={campoVariantes} className="space-y-2 rounded-xl border border-cyan/40 bg-card p-4">
               <label className="text-sm font-bold text-foreground">Fecha de Devolución</label>
               <input type="date" value={fechaDevolucion} onChange={(e) => setFechaDevolucion(e.target.value)}
@@ -123,15 +104,12 @@ const Reserva = () => {
                   className="rounded-md border border-cyan/60 bg-background/40 px-2 py-1 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-cyan" />
               </div>
             </motion.div>
-
-            {/* Fila: Teléfono + Silla para niños */}
             <div className="grid grid-cols-2 gap-3">
               <motion.div variants={campoVariantes} className="space-y-2 rounded-xl border border-cyan/40 bg-card p-3">
                 <label className="text-xs font-bold uppercase text-foreground">Teléfono</label>
                 <input type="tel" placeholder="ej. 900000000" value={telefono} onChange={(e) => setTelefono(e.target.value)}
                   className="w-full rounded-md border border-cyan/60 bg-background/40 px-2 py-1.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-cyan" />
               </motion.div>
-
               <motion.div variants={campoVariantes} className="space-y-3 rounded-xl border border-cyan/40 bg-card p-4">
                 <span className="block text-xs font-bold text-foreground">👶 Silla para niños</span>
                 <div className="flex items-center justify-between gap-3">
@@ -153,15 +131,11 @@ const Reserva = () => {
                 </div>
               </motion.div>
             </div>
-
-            {/* Tarjeta: Gmail */}
             <motion.div variants={campoVariantes} className="space-y-2 rounded-xl border border-cyan/40 bg-card p-4">
               <label className="text-sm font-bold text-foreground">Gmail</label>
               <input type="email" placeholder="ej: florcards@gmail.com" value={correo} onChange={(e) => setCorreo(e.target.value)}
                 className="w-full rounded-md border border-cyan/60 bg-background/40 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-cyan" />
             </motion.div>
-
-            {/* Resumen de precios */}
             <motion.div variants={campoVariantes} className="space-y-2 rounded-xl border border-cyan/40 bg-card p-4">
               <div className="flex justify-between text-sm">
                 <span className="font-bold text-foreground">Precio x dia</span>
@@ -181,7 +155,6 @@ const Reserva = () => {
                 </div>
               </div>
             </motion.div>
-
             <div className="flex justify-center pt-2">
               <motion.button
                 variants={campoVariantes}

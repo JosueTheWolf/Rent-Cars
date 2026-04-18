@@ -8,8 +8,6 @@ const ReservaExitosa = () => {
   const navegar = useNavigate();
   const { state } = useLocation();
   const { id } = useParams();
-  // Fallback: si no hay state (refresh), buscamos el vehículo por el id de la URL.
-  // Así siempre se muestra el auto correcto, no el primero del array.
   const vehiculo =
     state?.vehiculo ?? vehiculos.find((v) => v.id === id) ?? vehiculos[0];
   const total = state?.total ?? vehiculo.precioPorDia;
@@ -17,20 +15,17 @@ const ReservaExitosa = () => {
   return (
     <TransicionPagina>
       <div className="flex min-h-screen flex-col items-center justify-start bg-background px-8 py-8 overflow-y-auto">
-        {/* Check animado: círculo crece, check se dibuja, brillo pulsa */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
           className="relative mb-6"
         >
-          {/* Anillo de brillo pulsante detrás */}
           <motion.div
             animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0, 0.5] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
             className="absolute inset-0 rounded-full bg-green-400/40 blur-xl"
           />
-          {/* Círculo verde con borde */}
           <div className="relative flex h-32 w-32 items-center justify-center rounded-full border-4 border-green-400 bg-green-400/10 shadow-[0_0_30px_rgba(74,222,128,0.5)]">
             <motion.div
               initial={{ scale: 0, opacity: 0 }}

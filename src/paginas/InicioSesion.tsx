@@ -1,28 +1,9 @@
-/**
- * InicioSesion.tsx — PANTALLA DE LOGIN.
- *
- * Qué demuestra para la rúbrica:
- *  - useState: campos controlados (identidad, contraseña, errores, mostrar/ocultar).
- *  - useMemo: deriva si el usuario está tipeando un correo o un usuario.
- *  - Validación con zod (librería de schemas) → seguridad de inputs.
- *  - useNavigate (React Router) para redirigir tras login válido.
- *  - useContext (useUsuario) para guardar el usuario logueado en el estado GLOBAL.
- *  - Accesibilidad: aria-label en el botón de mostrar contraseña, autoComplete.
- */
 import { useState, useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Mail, User, Lock, Eye, EyeOff } from "lucide-react";
 import { z } from "zod"; // Librería para validar datos con esquemas tipados
 import { useUsuario } from "@/contexto/UsuarioContext";
 const fondoAuto = "/60fec9b2808152a899e107c20953f2c76dc8d726.jpg";
-
-/**
- * Schemas de validación con zod (cumple buenas prácticas de seguridad de inputs).
- *
- * El campo "identidad" acepta correo O nombre de usuario:
- *  - Si contiene "@" → debe ser un email válido (máx 255).
- *  - Si NO contiene "@" → solo letras, números, ".", "_", "-" (3-30 chars, sin espacios).
- */
 const esquemaCorreo = z
   .string()
   .trim()
@@ -42,8 +23,6 @@ const esquemaContrasenia = z
   .string()
   .min(6, { message: "Mínimo 6 caracteres" })
   .max(100, { message: "Demasiado larga" });
-
-// Convierte un nombre de usuario o prefijo de correo en un nombre amigable
 const formatearNombre = (texto: string) =>
   texto
     .replace(/[._-]+/g, " ")
@@ -57,18 +36,12 @@ const InicioSesion = () => {
   const [contrasenia, setContrasenia] = useState("");
   const [mostrarContrasenia, setMostrarContrasenia] = useState(false);
   const [errores, setErrores] = useState<{ identidad?: string; contrasenia?: string }>({});
-
-  /**
-   * useMemo: solo recalcula cuando cambia "identidad". Detecta si lo que tipea
-   * el usuario parece un correo (ícono Mail) o un nombre de usuario (ícono User).
-   */
   const pareceCorreo = useMemo(() => identidad.includes("@"), [identidad]);
 
   const manejarEnvio = (e: React.FormEvent) => {
     e.preventDefault();
     const nuevosErrores: typeof errores = {};
 
-    // Valida identidad según si parece correo o usuario
     const validacionIdentidad = pareceCorreo
       ? esquemaCorreo.safeParse(identidad)
       : esquemaUsuario.safeParse(identidad);
@@ -85,8 +58,6 @@ const InicioSesion = () => {
       setErrores(nuevosErrores);
       return;
     }
-
-    // Guarda en el Context global derivando nombre + email según el tipo
     if (pareceCorreo) {
       const prefijo = identidad.split("@")[0];
       actualizarUsuario({ nombre: formatearNombre(prefijo), email: identidad.trim() });
@@ -111,7 +82,6 @@ const InicioSesion = () => {
       <p className="mb-10 text-base text-muted-foreground">Ingresa tus datos</p>
 
       <form onSubmit={manejarEnvio} className="w-full max-w-md space-y-5" noValidate>
-        {/* Campo de identidad: correo o usuario */}
         <div>
           <div className={`flex items-center gap-3 rounded-xl border bg-card px-5 py-4 transition-colors ${errores.identidad ? "border-destructive" : "border-cyan"}`}>
             {pareceCorreo ? (
@@ -136,8 +106,6 @@ const InicioSesion = () => {
             <p className="mt-1 px-2 text-xs text-destructive">{errores.identidad}</p>
           )}
         </div>
-
-        {/* Campo de contraseña */}
         <div>
           <div className={`flex items-center gap-3 rounded-xl border bg-card px-5 py-4 transition-colors ${errores.contrasenia ? "border-destructive" : "border-cyan"}`}>
             <Lock size={26} strokeWidth={2} className="shrink-0 text-cyan" />

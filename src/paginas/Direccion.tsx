@@ -1,17 +1,7 @@
-/**
- * Direccion.tsx — pantalla de direcciones guardadas (Casa, Trabajo).
- *
- * Demuestra:
- *  - Render dinámico de íconos pasados como propiedad del objeto (`d.icono`).
- *  - Badge "Principal" condicional con renderizado JSX `{cond && <span/>}`.
- *  - Componente puro stateless → fácil de testear.
- */
 import { MapPin, Plus, Home, Briefcase } from "lucide-react";
 import TransicionPagina from "@/componentes/TransicionPagina";
 import NavInferior from "@/componentes/NavInferior";
 import CabeceraSecundaria from "@/componentes/CabeceraSecundaria";
-
-// Datos demo: en producción vendrían del usuario logueado en el backend
 const direcciones = [
   { icono: Home, etiqueta: "Casa", direccion: "Av. Arequipa 1234, Miraflores, Lima, Perú", principal: true },
   { icono: Briefcase, etiqueta: "Trabajo", direccion: "Av. Javier Prado 567, San Isidro, Lima, Perú", principal: false },

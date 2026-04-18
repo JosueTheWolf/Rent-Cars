@@ -7,8 +7,6 @@ import TransicionPagina from "@/componentes/TransicionPagina";
 import AvatarUsuario from "@/componentes/AvatarUsuario";
 import { vehiculos } from "@/datos/vehiculos";
 import { useUsuario } from "@/contexto/UsuarioContext";
-
-// Variantes para el efecto cascada (stagger) en la grilla
 const contenedorVariantes = {
   oculto: { opacity: 0 },
   visible: {
@@ -20,12 +18,6 @@ const contenedorVariantes = {
 const ListaVehiculos = () => {
   const [busqueda, setBusqueda] = useState("");
   const { usuario } = useUsuario();
-
-  /**
-   * useMemo: el filtrado solo se recalcula cuando cambia `busqueda`.
-   * Sin esto, cada render del componente (por cualquier razón) volvería a
-   * recorrer y filtrar todo el array de vehículos.
-   */
   const filtrados = useMemo(() => {
     const termino = busqueda.toLowerCase();
     return vehiculos.filter(
@@ -34,11 +26,6 @@ const ListaVehiculos = () => {
         v.modelo.toLowerCase().includes(termino)
     );
   }, [busqueda]);
-
-  /**
-   * useCallback: la función mantiene la misma referencia entre renders.
-   * Útil si en el futuro la pasamos a un hijo memoizado (ej: input controlado).
-   */
   const manejarCambioBusqueda = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setBusqueda(e.target.value),
     []
@@ -47,7 +34,6 @@ const ListaVehiculos = () => {
   return (
     <TransicionPagina>
       <div className="flex min-h-screen flex-col bg-background pb-20">
-        {/* Encabezado con fondo negro */}
         <div className="bg-black px-6 pt-6 pb-4">
           <div className="flex items-center gap-2">
             <AvatarUsuario nombre={usuario.nombre} tamanio="sm" />
@@ -69,15 +55,13 @@ const ListaVehiculos = () => {
             />
           </div>
         </div>
-
-        {/* Grilla de vehículos con animación en cascada */}
         <div className="flex-1 px-6 py-2">
           <motion.div
             className="grid grid-cols-2 gap-4"
             variants={contenedorVariantes}
             initial="oculto"
             animate="visible"
-            key={busqueda} // Re-anima cuando cambia el filtro
+            key={busqueda} 
           >
             {filtrados.map((v) => (
               <TarjetaVehiculo key={v.id} vehiculo={v} />

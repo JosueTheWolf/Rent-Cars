@@ -1,11 +1,3 @@
-/**
- * Idioma.tsx — selector de idioma (UI demo, sin i18n real conectado todavía).
- *
- * Demuestra:
- *  - useState para mantener cuál idioma está seleccionado.
- *  - Patrón "lista + selección activa": comparar `seleccionado === codigo`
- *    para mostrar el ícono Check al lado del idioma elegido.
- */
 import { useState } from "react";
 import { Check } from "lucide-react";
 import TransicionPagina from "@/componentes/TransicionPagina";
